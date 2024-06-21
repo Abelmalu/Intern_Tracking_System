@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->boolean('is_staff')->default(false);
+            $table->tinyInteger('type')->comment('1->admin, 2->school head, 3->department head,')->default(0);
+            $table->softDeletes();
         });
     }
 
