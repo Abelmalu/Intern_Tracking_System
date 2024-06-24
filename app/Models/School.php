@@ -10,7 +10,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class School extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name','description','head_id'
 
+    ];
 
     public function departments(){
 
@@ -20,6 +23,6 @@ class School extends Model
     public function head(){
 
 
-        return $this->belongsTo(User::class, 'head_id', 'id')->withTrashed();
+        return $this->belongsTo(User::class, 'head_id', 'id');
     }
 }

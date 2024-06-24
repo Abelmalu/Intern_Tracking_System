@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class department extends Model
+class Department extends Model
 {
     use HasFactory;
 
@@ -17,11 +17,9 @@ class department extends Model
 
     ];
 
-
-    public function internships(){
-
-
-        return $this->hasMany(Internship::class);
+    public function internships(): HasMany
+    {
+        return $this->hasMany(Internship::class, 'department_id', 'id');
     }
 
     public function head(){
