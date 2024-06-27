@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,8 +28,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-Route::middleware(['role:admin'])->group(function(){
-
+Route::middleware(['auth','role:admin'])->group(function(){
+    Route::get('staff/destroy/{staff}', [UserController::class, 'destroy'])->name('staff.delete');
     Route::resource('school', SchoolController::class);
+    Route::resource('staff',UserController::class);
 
 } );
