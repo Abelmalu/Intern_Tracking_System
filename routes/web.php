@@ -29,8 +29,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::middleware(['auth','role:admin'])->group(function(){
-    Route::get('staff/destroy/{staff}', [UserController::class, 'destroy'])->name('staff.delete');
+
     Route::resource('school', SchoolController::class);
+    Route::get('school/destroy/{school}', [SchoolController::class, 'destroy'])->name('school.delete');
     Route::resource('staff',UserController::class);
+    Route::get('staff/destroy/{staff}', [UserController::class, 'destroy'])->name('staff.delete');
 
 } );

@@ -12,13 +12,14 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item">Home</li>
-                        <li class="breadcrumb-item">Program</li>
-                        <li class="breadcrumb-item active">Add</li>
+                        <li class="breadcrumb-item">School</li>
+                        <li class="breadcrumb-item active">Edit</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
+
 @stop
 
 @section('content')
@@ -46,26 +47,38 @@
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <div class="col-md-6">
-                            <form action="{{ route('school.store')}}" method="POST">
+                            <form action="{{ route('school.update', $school) }}" method="POST">
                                 @csrf
+                                @method('PUT')
 
                                 <label for="head" class="form-label">School Head</label>
                                 <select id="head" class="form-control form-select mb-3" name="head_id">
 
-                                    <option value="" disabled selected>Select school head</option>
+                                    @if (!empty($school->head->name))
+                                        <option value="{{ $school->head->id }}" selected>{{ $school->head->name }}</option>
+                                    {{-- @else
+                                        <option value="">None for now</option> --}}
+                                    @endif
 
+
+                                    <option value="">None for now</option>
                                     @foreach ($staffs as $staff)
+                                        @if (!empty($school->head->id))
+                                            @continue($school->head->id == $staff->id)
+                                        @endif
+
                                         <option value="{{ $staff->id }} ">{{ $staff->name }}</option>
                                     @endforeach
                                 </select>
 
                                 <label for="name" class="form-label">School Name</label>
-                                <input type="text" class="form-control mb-3" placeholder="School Name" name="name">
+                                <input type="text" class="form-control mb-3" placeholder="School Name" name="name"
+                                    value="{{ $school->name }}">
 
 
                                 <label for="description" class="form-label"> Description</label>
-                                <input type="text" class="form-control mb-3" placeholder="Description"
-                                    name="description">
+                                <input type="text" class="form-control mb-3" placeholder="Description" name="description"
+                                    value="{{ $school->description }}">
 
                                 <input type="submit" value="Register" class="float-right btn btn-primary">
 

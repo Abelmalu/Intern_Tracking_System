@@ -74,9 +74,13 @@ class User extends Authenticatable
         return $this->hasMany(User_application::class);
 
     }
-
-
     //relationships end here
+
+
+    public function getName(){
+
+        
+    }
 
 
 }

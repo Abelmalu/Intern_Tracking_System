@@ -1,5 +1,3 @@
-
-
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
@@ -10,29 +8,49 @@
 
 @section('content')
 
-<table>
-    <tr>
-        <th >School name</th>
-        <th>School head</th>
-        <th>Department count</th>
-        <th>Action</th>
-    </tr>
- @foreach ( $schools as $school )
- <tr>
-    <td>{{ $school->name }}</td>
-    <td>{{ $school->head }}</td>
-    <td>{{ $school->departments->count() }}</td>
-    <td>action</td>
- </tr>
+    <table id="dataTable" class="table table-bordered table-striped">
+        <tr>
+            <th>School name</th>
+            <th>School head</th>
+            <th>Department count</th>
+            <th>Action</th>
+        </tr>
+        @foreach ($schools as $school)
+            <tr>
+                <td>{{ $school->name }}</td>
+                @if (!empty($school->head))
+                    <td>{{ $school->head->name }}</td>
+                @else
+                    <td>Not assigned</td>
+                @endif
 
- @endforeach
-    <tr>
-        <td>hellow</td>
-        <td>welcome</td>
-        <td>to</td>
-        <td>the world</td>
-    </tr>
-</table>
+
+                <td>{{ $school->departments->count() }}</td>
+                <td>
+                    <a href="{{ route('school.show', $school) }}">
+                        <button class="btn btn-info btn-xs btn-flat">
+                            <i class="fas fa-eye"></i>
+                            View
+                        </button>
+                    </a>
+                    <a href="{{ route('school.edit', $school) }}">
+                        <button class="btn btn-primary btn-xs btn-flat">
+                            <i class="fas fa-edit"></i>
+                            Edit
+                        </button>
+                    </a>
+                    <a href="{{ route('school.delete', $school) }}"
+                        onclick="if(confirm('Are you sure, you want to delete {{ $school->name }}?') == false){event.preventDefault()}">
+                        <button class="btn btn-danger btn-xs btn-flat">
+                            <i class="fas fa-trash"></i>
+                            Delete
+                        </button>
+                    </a>
+                </td>
+            </tr>
+        @endforeach
+
+    </table>
 
 @stop
 
@@ -42,5 +60,7 @@
 @stop
 
 @section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+    <script>
+        console.log("Hi, I'm using the Laravel-AdminLTE package!");
+    </script>
 @stop
