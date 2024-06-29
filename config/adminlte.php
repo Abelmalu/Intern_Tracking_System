@@ -310,84 +310,134 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
+
         [
-            'text' => 'blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
+            'text' => 'Dashboard',
+            'url' => 'staff/create',
+            'icon' => 'nav-icon fas fa-tachometer-alt',
+            // 'label' => 4,
+
         ],
+
+
         [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text' => 'multilevel',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Schools',
+            'can' => 'manage schools',
+            'icon' => ' nav-icon right fas fa-angle-left',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'Add School',
+                    'url' => 'school/create',
+                    'icon' => 'nav-icon fas fa-plus nav-icon'
                 ],
+
                 [
-                    'text' => 'level_one',
-                    'url' => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                        ],
-                        [
-                            'text' => 'level_two',
-                            'url' => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url' => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url' => '#',
+                    'text' => 'School List',
+                    'url' => 'school/',
+                    'icon' => 'nav-icon fas fa-list nav-icon',
                 ],
             ],
+
         ],
-        ['header' => 'labels'],
+
+
         [
-            'text' => 'important',
-            'icon_color' => 'red',
-            'url' => '#',
+            'text' => 'Departments',
+            'can' => 'manage departments',
+            'icon' => 'right nav-icon fas fa-angle-left',
+            'submenu' => [
+                [
+                    'text' => 'Add Department',
+                    'url' => 'department/create',
+                    'icon' => 'nav-icon fas fa-plus nav-icon'
+                ],
+
+                [
+                    'text' => 'Department List',
+                    'url' => 'department/',
+                    'icon' => 'nav-icon fas fa-list nav-icon',
+                ],
+            ],
+
+        ],
+
+
+        [
+            'text' => 'Programs',
+            'can' => 'manage schools',
+            'icon' => 'right nav-icon fas fa-angle-left',
+            'submenu' => [
+                [
+                    'text' => 'Add Program',
+                    'url' => 'program/create',
+                    'icon' => 'nav-icon fas fa-plus nav-icon'
+                ],
+
+                [
+                    'text' => 'Program List',
+                    'url' => 'program/',
+                    'icon' => 'nav-icon fas fa-list nav-icon',
+                ],
+            ],
+
+        ],
+
+
+        [
+            'text' => 'Staffs',
+            'can' => 'manage staffs',
+            'icon' => 'right nav-icon fas fa-angle-left',
+            'submenu' => [
+                [
+                    'text' => 'Add Staff',
+                    'url' => 'staff/create',
+                    'icon' => 'nav-icon fas fa-plus nav-icon'
+                ],
+
+                [
+                    'text' => 'Staff List',
+                    'url' => 'staff/',
+                    'icon' => 'nav-icon fas fa-list nav-icon',
+                ],
+            ],
+
+        ],
+
+        [
+            'text' => 'Internships',
+            'url' => '',
+            'can' => 'readDelete internships',
+            'icon' => 'fa-briefcase nav-icon'
         ],
         [
-            'text' => 'warning',
-            'icon_color' => 'yellow',
-            'url' => '#',
+            'text' => 'Applications',
+            'url' => '',
+            'can' => 'readDelete applications',
+            'icon' => 'nav-icon fas fa-paper-plane nav-icon'
         ],
         [
-            'text' => 'information',
-            'icon_color' => 'cyan',
-            'url' => '#',
+            'text' => 'Interns',
+            'url' => '',
+            'can' => 'readDelete interns',
+            'icon' => 'nav-icon nav-icon fas fa-user-graduate'
+        ],
+        [
+            'text' => 'Reports',
+            'url' => '',
+            'icon' => 'right nav-icon fas fa-angle-left'
+        ],
+        [
+            'text' => 'Profile',
+            'url' => '',
+            'icon' => 'nav-icon nav-icon fas fa-user'
         ],
     ],
+
+
+
+
+
+
 
     /*
     |--------------------------------------------------------------------------
