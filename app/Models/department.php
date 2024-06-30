@@ -24,7 +24,7 @@ class Department extends Model
 
     public function head(){
 
-        return $this->belongsTo(User::class, 'head_id', 'id')->withTrashed();
+        return $this->belongsTo(User::class, 'head_id', 'id');
     }
 
     public function school(){

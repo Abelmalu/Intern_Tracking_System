@@ -1,4 +1,6 @@
 @extends('adminlte::page')
+@section('plugins.Datatables', true)
+@section('plugins.DatatablesPlugin', true)
 
 @section('title', 'Dashboard')
 
@@ -17,48 +19,68 @@
 @stop
 
 @section('content')
-    <table id="dataTable" class="table table-bordered table-striped">
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Actions</th>
 
-        </tr>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>Staff information</h3>
+                    </div>
+                </div>
+                    <div class="card-body">
+                        <x-adminlte-datatable id="table2" :heads="$heads">
 
-        @foreach ($staffs as $staff)
-            <tr>
-                <td>{{$loop->iteration }}</td>
-                <td>{{ $staff->name }}</td>
-                {{-- {{ route('admin.staff.view', $staff->id) }} --}}
-{{--
-                <td>{{head of }}</td> --}}
-                <td>
-                    <a href="{{ route('staff.show', $staff)}}">
-                        <button class="btn btn-info btn-xs btn-flat">
-                            <i class="fas fa-eye"></i>
-                            View
-                        </button>
-                    </a>
 
-                    {{-- <a href="{{ route('staff.edit',$staff )}}">
+                            @foreach ($staffs as $staff)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $staff->name }}</td>
+                                    {{-- {{ route('admin.staff.view', $staff->id) }} --}}
+                                    @if(!empty($staff->role )&& $staff->role->name == 'school' || 'department' )
+                                    <td>head of {{ $staff->role }} </td>
+
+                                    @else
+                                        <td>Role not given</td>
+
+                                    @endif
+
+
+                                    <td>
+                                        <a href="{{ route('staff.show', $staff) }}">
+                                            <button class="btn btn-info btn-xs btn-flat">
+                                                <i class="fas fa-eye"></i>
+                                                View
+                                            </button>
+                                        </a>
+
+                                        {{-- <a href="{{ route('staff.edit',$staff )}}">
                         <button class="btn btn-primary btn-xs btn-flat">
                             <i class="fas fa-edit"></i>
                             Edit
                         </button> --}}
-                    </a>
-                    <a href="{{ route('staff.delete',$staff)}}" onclick="if(confirm('Are you sure, you want to delete this user ? ') == false){event.preventDefault()}">
+                                        </a>
+                                        <a href="{{ route('staff.delete', $staff) }}"
+                                            onclick="if(confirm('Are you sure, you want to delete this user ? ') == false){event.preventDefault()}">
 
-                        <button class="btn btn-danger btn-xs btn-flat">
-                            <i class="fas fa-trash"></i>
-                            Delete
-                        </button>
-                    </a>
-                </td>
+                                            <button class="btn btn-danger btn-xs btn-flat">
+                                                <i class="fas fa-trash"></i>
+                                                Delete
+                                            </button>
+                                        </a>
+                                    </td>
 
-            </tr>
-        @endforeach
-    </table>
+                                </tr>
+                            @endforeach
+
+                        </x-adminlte-datatable>
+
+
+                    </div>
+
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('css')

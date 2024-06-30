@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\UserController;
@@ -32,7 +33,19 @@ Route::middleware(['auth','role:admin'])->group(function(){
 
     Route::resource('school', SchoolController::class);
     Route::get('school/destroy/{school}', [SchoolController::class, 'destroy'])->name('school.delete');
+
     Route::resource('staff',UserController::class);
     Route::get('staff/destroy/{staff}', [UserController::class, 'destroy'])->name('staff.delete');
 
+
+
 } );
+
+
+
+Route::middleware(['auth', 'permission:manage departments' ])->group(function(){
+    Route::resource('department', DepartmentController::class);
+    Route::get('department/destroy/{department}', [DepartmentController::class, 'destroy'])->name('department.delete');
+
+
+});

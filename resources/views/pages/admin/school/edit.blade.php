@@ -66,8 +66,9 @@
                                         @if (!empty($school->head->id))
                                             @continue($school->head->id == $staff->id)
                                         @endif
-
+                                        @if (empty($staff->hasAnyrole(['admin','school','department'])))
                                         <option value="{{ $staff->id }} ">{{ $staff->name }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
 

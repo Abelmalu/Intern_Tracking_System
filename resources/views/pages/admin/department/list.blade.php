@@ -23,33 +23,36 @@
                     <x-adminlte-datatable id="table1" :heads="$heads">
 
 
-                        @foreach ($schools as $school)
+                        @foreach ($departments as $department)
                             <tr>
 
-                              <td>{!! $loop->iteration !!}</td>
-                                <td>{!! $school->name !!}</td>
-                                @if (!empty($school->head))
-                                    <td>{{ $school->head->name }}</td>
+                                <td>{!! $loop->iteration !!}</td>
+                                <td>{!! $department->name !!}</td>
+                                <td>{{$department->school->name}}</td>
+                                @if (!empty($department->head))
+                                    <td>{{ $department->head->name }}</td>
                                 @else
                                     <td>Not assigned</td>
                                 @endif
-                                <td>{{ $school->departments->count() }}</td>
+
+
+
 
                                 <td>
-                                    <a href="{{ route('school.show', $school) }}">
+                                    <a href="{{ route('department.show', $department) }}">
                                         <button class="btn btn-info btn-xs btn-flat">
                                             <i class="fas fa-eye"></i>
                                             View
                                         </button>
                                     </a>
-                                    <a href="{{ route('school.edit', $school) }}">
+                                    <a href="{{ route('department.edit', $department) }}">
                                         <button class="btn btn-primary btn-xs btn-flat">
                                             <i class="fas fa-edit"></i>
                                             Edit
                                         </button>
                                     </a>
-                                    <a href="{{ route('school.delete', $school) }}"
-                                        onclick="if(confirm('Are you sure, you want to delete {{ $school->name }}?') == false){event.preventDefault()}">
+                                    <a href="{{ route('department.delete', $department) }}"
+                                        onclick="if(confirm('Are you sure, you want to delete {{ $department->name }}?') == false){event.preventDefault()}">
                                         <button class="btn btn-danger btn-xs btn-flat">
                                             <i class="fas fa-trash"></i>
                                             Delete

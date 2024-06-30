@@ -20,14 +20,10 @@ class SchoolController extends Controller
         $heads = [
 
             '#'=>'#',
-            'School Name' => 'name',
-            'School Head'=>'head_id',
+            'School Name',
+            'School Head',
             'Department Count',
             'Actions'
-
-
-
-
 
         ];
 
@@ -39,6 +35,8 @@ class SchoolController extends Controller
     public function create()
     {
         $staffs = User::where('is_staff', 1)->get();
+
+
 
 
         return view('pages.admin.school.add', ['staffs' => $staffs]);
@@ -56,7 +54,8 @@ class SchoolController extends Controller
             [
                 'head_id' => 'nullable|exists:\App\Models\User,id|integer',
                 'name' => 'string|required',
-                'description' => 'nullable|string'
+                'description' => 'nullable|string',
+                
             ]
         );
 

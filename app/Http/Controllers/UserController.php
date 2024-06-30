@@ -14,8 +14,15 @@ class UserController extends Controller
 
         $staffs = User::where('is_staff',1)->get();
 
+        $heads = [
+            '#',
+            'Staff Name',
+            'Status',
+            'Actions'
+        ];
 
-        return view('pages.admin.staff.list',['staffs'=>$staffs]);
+
+        return view('pages.admin.staff.list',['staffs'=>$staffs, 'heads'=>$heads]);
 
 
 
@@ -84,7 +91,7 @@ class UserController extends Controller
     function destroy(User $staff){
 
         $staff->delete();
-        return redirect()->route('staff.list')->with('success','staff deleted successfully');
+        return redirect()->route('staff.index')->with('success','staff deleted successfully');
 
 
     }
