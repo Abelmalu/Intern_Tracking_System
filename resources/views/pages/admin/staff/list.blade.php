@@ -19,6 +19,7 @@
 @section('content')
     <table id="dataTable" class="table table-bordered table-striped">
         <tr>
+            <th>#</th>
             <th>Name</th>
             <th>Status</th>
             <th>Actions</th>
@@ -27,6 +28,7 @@
 
         @foreach ($staffs as $staff)
             <tr>
+                <td>{{$loop->iteration }}</td>
                 <td>{{ $staff->name }}</td>
                 {{-- {{ route('admin.staff.view', $staff->id) }} --}}
 {{--

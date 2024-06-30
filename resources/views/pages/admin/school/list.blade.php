@@ -1,4 +1,6 @@
 @extends('adminlte::page')
+@section('plugins.Datatables', true)
+@section('plugins.DatatablesPlugin', true)
 
 @section('title', 'Dashboard')
 
@@ -8,8 +10,9 @@
 
 @section('content')
 
-    <table id="dataTable" class="table table-bordered table-striped">
+    {{-- <table id="dataTable" class="table table-bordered table-striped">
         <tr>
+            <th>#</th>
             <th>School name</th>
             <th>School head</th>
             <th>Department count</th>
@@ -17,6 +20,7 @@
         </tr>
         @foreach ($schools as $school)
             <tr>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $school->name }}</td>
                 @if (!empty($school->head))
                     <td>{{ $school->head->name }}</td>
@@ -26,7 +30,40 @@
 
 
                 <td>{{ $school->departments->count() }}</td>
-                <td>
+
+            </tr>
+        @endforeach
+        {{$schools->links()}}
+
+    </table> --}}
+
+
+
+    {{-- Setup data for datatables --}}
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">School Information</div>
+                </div>
+                <div class="card-body">
+
+                    <x-adminlte-datatable id="table1" :heads="$heads">
+
+
+                        @foreach ($schools as $school)
+                            <tr>
+
+                                <td>{!! $loop->iteration !!}</td>
+                                <td>{!! $school->name !!}</td>
+                                @if (!empty($school->head))
+                                    <td>{{ $school->head->name }}</td>
+                                @else
+                                    <td>Not assigned</td>
+                                @endif
+                                <td>{{ $school->departments->count() }}</td>
+
+                                <td>
                     <a href="{{ route('school.show', $school) }}">
                         <button class="btn btn-info btn-xs btn-flat">
                             <i class="fas fa-eye"></i>
@@ -47,10 +84,25 @@
                         </button>
                     </a>
                 </td>
-            </tr>
-        @endforeach
 
-    </table>
+
+                            </tr>
+                        @endforeach
+
+
+                    </x-adminlte-datatable>
+
+                </div>
+
+
+
+
+            </div>
+
+
+
+        </div>
+    </div>
 
 @stop
 

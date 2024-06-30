@@ -16,7 +16,23 @@ class SchoolController extends Controller
 
         $schools = School::all();
 
-        return view('pages.admin.school.list', ['schools' => $schools]);
+
+        $heads = [
+
+            '#'=>'#',
+            'School Name' => 'name',
+            'School Head'=>'head_id',
+            'Department Count',
+            'Actions'
+
+
+
+
+
+        ];
+
+
+        return view('pages.admin.school.list',compact('heads','schools'));
     }
 
 
@@ -85,36 +101,26 @@ class SchoolController extends Controller
         $school_head = User::find($request->get('head_id'));
         $previous_school_head = $school->head;
 
-        if (!empty($school_head) && !empty($previous_school_head) ) {
+        if (!empty($school_head) && !empty($previous_school_head)) {
             // dd($school_head);
             $school_head->assignRole('school');
             $previous_school_head->removeRole('school');
+        } elseif (empty($school_head) && empty($previous_school_head)) {
 
-        }
-
-        elseif(empty($school_head) && empty($previous_school_head)){
-
-            $school_head=null;
-        }
-
-        elseif(empty($school_head) ){
+            $school_head = null;
+        } elseif (empty($school_head)) {
 
             $previous_school_head->removeRole('school');
-
-
         }
 
 
 
-        if( $school->update($request->all())){
+        if ($school->update($request->all())) {
 
-            return redirect()->route('school.index')->with('success','school updated successfully');
-        }
-
-        else{
+            return redirect()->route('school.index')->with('success', 'school updated successfully');
+        } else {
 
             return redirect()->route('school.index')->with('error', 'school not updated successfully');
-
         }
     }
 
@@ -122,7 +128,6 @@ class SchoolController extends Controller
     {
         $school->delete();
 
-        return redirect()->route('school.index')->with('Success','successfully deleted');
-
+        return redirect()->route('school.index')->with('Success', 'successfully deleted');
     }
 }
