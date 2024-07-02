@@ -79,7 +79,13 @@ class User extends Authenticatable
 
     public function getName(){
 
-        
+
+    }
+
+    public function programs(){
+
+
+        return $this->belongsToMany(Program::class);
     }
 
 

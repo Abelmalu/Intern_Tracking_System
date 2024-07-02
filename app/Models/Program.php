@@ -10,6 +10,10 @@ class Program extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name','description'
+    ];
+
     public function internships(): BelongsToMany
     {
         return $this->belongsToMany(Internship::class);

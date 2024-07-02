@@ -38,6 +38,9 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('staff/destroy/{staff}', [UserController::class, 'destroy'])->name('staff.delete');
 
 
+    Route::resource('program',ProgramController::class);
+    Route::get('program/destroy/{program}', [ProgramController::class, 'destroy'])->name('program.delete');
+
 
 } );
 
