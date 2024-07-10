@@ -29,4 +29,31 @@ class Internship extends Model
         return $this->belongsToMany(Department::class);
     }
 
+
+
+    public function prerequisites(){
+
+
+        return $this->hasMany(internship_prerequisites::class);
+    }
+
+
+    public function isDeadlinePassed(){
+
+        return  \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->deadline)->isPast();
+    }
+
+
+    public function isStarted(){
+
+        return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->start_date)->isPast();
+    }
+
+
+    public function isEnded(): bool
+    {
+        return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->end_date)->isPast();
+    }
+
+
 }

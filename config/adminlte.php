@@ -403,15 +403,42 @@ return [
 
         ],
 
+
         [
             'text' => 'Internships',
-            'url' => '',
+            'can' => 'manage internships',
+            'icon' => 'nav-icon fas fa-briefcase',
+            'submenu' => [
+                [
+                    'text' => 'Add Internship',
+                    'url' => 'internship/create',
+                    'icon' => 'nav-icon fas fa-plus nav-icon'
+                ],
+
+                [
+                    'text' => 'Internship List',
+                    'url' => 'internship/',
+                    'icon' => 'nav-icon fas fa-list nav-icon',
+                ],
+            ],
+
+        ],
+
+
+
+
+
+
+        [
+            'text' => 'Internships',
+            'url' => 'internship',
             'can' => 'readDelete internships',
             'icon' => 'nav-icon fas fa-briefcase'
         ],
+
         [
             'text' => 'Applications',
-            'url' => '',
+            'url' => 'application',
             'can' => 'readDelete applications',
             'icon' => 'nav-icon fas fa-paper-plane nav-icon'
         ],

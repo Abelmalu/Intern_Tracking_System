@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\InternshipController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
+use App\Models\Internship;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,12 +28,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 
 
 
 Route::middleware(['auth','role:admin'])->group(function(){
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'adminIndex'])->name('admin.home');
 
     Route::resource('school', SchoolController::class);
     Route::get('school/destroy/{school}', [SchoolController::class, 'destroy'])->name('school.delete');
@@ -44,11 +49,19 @@ Route::middleware(['auth','role:admin'])->group(function(){
 
 } );
 
+Route::middleware([  'auth', 'role:department'])->group(function () {
+    Route::get('/dashboard',[DashboardController::class, 'departmentIndex'])->name('department.home');
+    Route::resource('internship', InternshipController::class);
+    Route::get('internship/destroy/{internship}', [Internship::class, 'destroy'])->name('internship.delete');
+});
 
 
-Route::middleware(['auth', 'permission:manage departments' ])->group(function(){
+
+Route::middleware(['auth', ])->group(function(){
+
     Route::resource('department', DepartmentController::class);
     Route::get('department/destroy/{department}', [DepartmentController::class, 'destroy'])->name('department.delete');
 
 
 });
+

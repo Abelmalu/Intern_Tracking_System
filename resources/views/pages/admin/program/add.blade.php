@@ -34,10 +34,10 @@
                                     @csrf
 
                                     <label for="name" class="label-form">Program Name</label>
-                                    <input type="text" name="name" id="name" class="form-control mb-3">
+                                    <input type="text" name="name" id="name" class="form-control mb-3" placeholder="Enter program name">
 
                                     <label for="description" class="label-form">Description</label>
-                                    <textarea name="description" id="description" class="form-control mb-3"></textarea>
+                                    <textarea name="description" id="description" class="form-control mb-3" placeholder="Enter program description"></textarea>
 
                                     <input type="submit" value="Register" class="float-right btn btn-primary">
                                 </form>

@@ -55,7 +55,7 @@ class SchoolController extends Controller
                 'head_id' => 'nullable|exists:\App\Models\User,id|integer',
                 'name' => 'string|required',
                 'description' => 'nullable|string',
-                
+
             ]
         );
 
@@ -110,6 +110,9 @@ class SchoolController extends Controller
         } elseif (empty($school_head)) {
 
             $previous_school_head->removeRole('school');
+        } elseif (!empty($school_head)) {
+
+            $school_head->assignRole('department');
         }
 
 

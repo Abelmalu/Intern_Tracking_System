@@ -91,7 +91,7 @@ class DepartmentController extends Controller
 
             ]
         );
-        $school_head = User::find($request->get('head_id'));
+        $department_head = User::find($request->get('head_id'));
         $previous_department_head = $department->head;
 
         if (!empty($department_head) && !empty($previous_department_head)) {
@@ -100,10 +100,15 @@ class DepartmentController extends Controller
             $previous_department_head->removeRole('department');
         } elseif (empty($department_head) && empty($previous_department_head)) {
 
-            $department_head = null;
+            $department_head->removeRole('department');
+            $previous_department_head->removeRole('department');
         } elseif (empty($department_head)) {
 
             $previous_department_head->removeRole('department');
+        }
+         elseif (!empty($department_head)) {
+
+            $department_head->assignRole('department');
         }
 
 
