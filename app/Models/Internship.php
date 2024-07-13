@@ -13,7 +13,7 @@ class Internship extends Model
     use HasFactory;
 
     protected $fillable = [
-        'department_id', 'title', 'description', 'minimum_cgpa', 'quota', 'deadline', 'start_date', 'end_date', 'status', 'avatar'
+        'department_id',  'title', 'description', 'minimum_cgpa', 'quota', 'deadline', 'start_date', 'end_date', 'status', 'avatar'
 
 
     ];
@@ -21,12 +21,12 @@ class Internship extends Model
 
     public function department(): BelongsTo
     {
-        return $this->belongsTo(Department::class, 'department_id', 'id')->withTrashed();
+        return $this->belongsTo(Department::class, 'department_id', 'id');
     }
 
     public function programs(): BelongsToMany
     {
-        return $this->belongsToMany(Department::class);
+        return $this->belongsToMany(Program::class);
     }
 
 

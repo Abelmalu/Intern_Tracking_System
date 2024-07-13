@@ -17,6 +17,7 @@ class Program extends Model
     public function internships(): BelongsToMany
     {
         return $this->belongsToMany(Internship::class);
+        
     }
 
 }

@@ -10,7 +10,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class internship_prerequisites extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'internship_id', 'pre_key', 'description'
+    ];
 
     public function internship(){
 

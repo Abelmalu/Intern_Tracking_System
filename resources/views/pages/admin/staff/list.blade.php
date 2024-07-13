@@ -38,7 +38,11 @@
                                     <td>{{ $staff->name }}</td>
                                     {{-- {{ route('admin.staff.view', $staff->id) }} --}}
                                     @if(!empty($staff->role )&& $staff->role->name == 'school' || 'department' )
-                                    <td>head of {{ $staff->role }} </td>
+                                        @foreach ($staff->roles as $role)
+                                            <td>head of {{ $role->name }} </td>
+
+                                        @endforeach
+
 
                                     @else
                                         <td>Role not given</td>
