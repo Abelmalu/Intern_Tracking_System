@@ -28,51 +28,71 @@
                         <h3>internship information</h3>
                     </div>
                 </div>
-                    <div class="card-body">
-                        <x-adminlte-datatable id="table2" :heads="$heads">
+                <div class="card-body">
+                    <x-adminlte-datatable id="table2" :heads="$heads">
 
 
-                            @foreach ($internships as $internship)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $internship->title }}</td>
-                                    <td>{{ $internship->quota}}</td>
-                                    <td>{{ $internship->deadline}}</td>
-                                    <td>Accepting Applicants</td>
+                        @foreach ($internships as $internship)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $internship->title }}</td>
+                                <td>{{ $internship->quota }}</td>
+                                <td>{{ $internship->deadline }}</td>
+                                <td>
+                                    @if ($internship->status == 0)
+                                        <span class="badge badge-danger">Ended</span>
+                                    @elseif ($internship->status == 1 && !$internship->isDeadlinePassed())
+                                        <span class="badge badge-success">Accepting Applicants</span>
+                                    @elseif ($internship->status == 2)
+                                        <span class="badge badge-warning">Ongoing</span>
+                                    @elseif ($internship->status == 3)
+                                        <span class="badge badge-info">Waiting</span>
+                                    @elseif ($internship->status == 4)
+                                        <span class="badge badge-danger">Aborted</span>
+                                    @endif
+                                </td>
 
 
 
-                                    <td>
-                                        <a href="{{ route('internship.show', $internship) }}">
-                                            <button class="btn btn-info btn-xs btn-flat">
-                                                <i class="fas fa-eye"></i>
-                                                View
+                                <td>
+                                    @if (!$internship->isEnded() && $internship->isStarted() && $internship->status != '2')
+                                        <a href="{{ route('department.internship.start', $internship->id) }}">
+                                            <button class="btn btn-success btn-xs btn-flat">
+                                                <i class="fas fa-check"></i>
+                                                Start
                                             </button>
                                         </a>
+                                    @endif
+                                    <a href="{{ route('internship.show', $internship) }}">
+                                        <button class="btn btn-info btn-xs btn-flat">
+                                            <i class="fas fa-eye"></i>
+                                            View
+                                        </button>
+                                    </a>
 
-                                        {{-- <a href="{{ route('internship.edit',$internship )}}">
-                        <button class="btn btn-primary btn-xs btn-flat">
-                            <i class="fas fa-edit"></i>
-                            Edit
-                        </button> --}}
-                                        </a>
-                                        <a href="{{ route('internship.delete', $internship) }}"
-                                            onclick="if(confirm('Are you sure, you want to delete this user ? ') == false){event.preventDefault()}">
+                                    <a href="{{ route('internship.edit', $internship) }}">
+                                        <button class="btn btn-primary btn-xs btn-flat">
+                                            <i class="fas fa-edit"></i>
+                                            Edit
+                                        </button>
+                                    </a>
+                                    <a href="{{ route('internship.delete', $internship) }}"
+                                        onclick="if(confirm('Are you sure, you want to delete this internship ? ') == false){event.preventDefault()}">
 
-                                            <button class="btn btn-danger btn-xs btn-flat">
-                                                <i class="fas fa-trash"></i>
-                                                Delete
-                                            </button>
-                                        </a>
-                                    </td>
+                                        <button class="btn btn-danger btn-xs btn-flat">
+                                            <i class="fas fa-trash"></i>
+                                            Delete
+                                        </button>
+                                    </a>
+                                </td>
 
-                                </tr>
-                            @endforeach
+                            </tr>
+                        @endforeach
 
-                        </x-adminlte-datatable>
+                    </x-adminlte-datatable>
 
 
-                    </div>
+                </div>
 
             </div>
         </div>

@@ -55,5 +55,24 @@ class Internship extends Model
         return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->end_date)->isPast();
     }
 
+    public function updateStatus(int $status = null): bool
+    {
+        if ($status == null) {
+            if ($this->isDeadlinePassed()) {
+                if ($this->status == 1 || $this->status == 3 || $this->status == 2 || $this->status == 0) {
+                    if (!$this->isEnded() && !$this->isStarted()) {
+                        $this->update(['status' => 3]);
+                    }
+                }
+
+                if ($this->isEnded() && $this->status == 3) {
+                    $this->update(['status' => 4]);
+                }
+            } else {
+                $this->update(['status' => 1]);
+            }
+        }
+        return true;
+    }
 
 }

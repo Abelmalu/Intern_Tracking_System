@@ -7,6 +7,7 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InternshipPrerequisitesController;
 use App\Models\Internship;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -52,7 +53,10 @@ Route::middleware(['auth','role:admin'])->group(function(){
 Route::middleware([  'auth', 'role:department'])->group(function () {
     Route::get('/dashboard',[DashboardController::class, 'departmentIndex'])->name('department.home');
     Route::resource('internship', InternshipController::class);
-    Route::get('internship/destroy/{internship}', [Internship::class, 'destroy'])->name('internship.delete');
+    Route::get('internship/destroy/{internship}', [InternshipController::class, 'destroy'])->name('internship.delete');
+
+    Route::resource('/prerequisite', InternshipPrerequisitesController::class);
+
 });
 
 
