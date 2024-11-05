@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+
+
+
+    public function profile(){
+
+
+        return view('pages.user.profile.base');
+    }
 
 
     function index(){
@@ -96,4 +105,35 @@ class UserController extends Controller
 
     }
 
+
+
+
+
+    public function passwordChange(Request $request, User $user)
+    {
+        // check for authorization
+        if ($user->id !== auth()->user()->id) return redirect()->route('userProfile.detail')->with('error', 'You are not Authorized for this action!');
+        // validating request
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'string|required',
+            'password' => 'string|required|confirmed|min:8',
+        ]);
+
+        // check if the validator failed
+        if ($validator->fails()) {
+            return redirect()->route('userProfile.detail')->withErrors($validator)->withInput()->with(['password_page' => true]);
+        }
+
+        if (Hash::check($request->get('old_password'), $user->password)) {
+            $user->update([
+                'password' => Hash::make($request->get('password'))
+            ]);
+            return redirect()->route('userProfile.detail')->with(['success' => 'Password changed successfully.', 'password_page' => true]);
+        } else {
+            return redirect()->route('userProfile.detail')->with(['error' => 'Old password is incorrect.', 'password_page' => true]);
+        }
+    }
+
+
 }
+

@@ -28,7 +28,25 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    public function redirectTo()
+    {
+
+        $redirects = [
+            'admin' => '/home',
+            'department' => '/dashboard',
+            'user'=>'/userHome'
+
+        ];
+
+        $roles = Auth()->user()->roles->map->name;
+
+        foreach ($redirects as $role => $url) {
+            if ($roles->contains($role)) {
+                return $url;
+            }
+        }
+        return '/login';
+    }
 
     /**
      * Create a new controller instance.

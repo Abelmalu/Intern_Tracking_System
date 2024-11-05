@@ -5,9 +5,33 @@ namespace App\Http\Controllers;
 use App\Models\Internship;
 use App\Models\Program;
 use Illuminate\Http\Request;
+use App\Http\Resources\InternshipResource;
 
 class InternshipController extends Controller
 {
+
+    public function apiIndex(){
+
+        $internships = Internship::all();
+
+        $data = [];
+
+
+        foreach($internships as $internship){
+
+            $data[] = new InternshipResource($internship);
+
+
+        }
+
+        return $data;
+
+
+
+
+
+
+    }
     public function index()
     {
 
@@ -91,7 +115,7 @@ class InternshipController extends Controller
 
     public function show(Internship $internship)
     {
-        return view('pages.department.internsip.view',compact('internship'));
+        return view('pages.user.internship.view', compact('internship'));
     }
 
     public function edit(Internship $internship)
@@ -148,7 +172,26 @@ class InternshipController extends Controller
         $internship->delete();
 
         return redirect()->route('internship.index')->with('Success', 'successfully deleted');
+    }
 
+    public function start(Internship $internship)
+    {
+        // check authorization
 
+        //check status
+
+        if (!$internship->isEnded() && $internship->isStarted() && $internship->status != '2') {
+            // if (count($internship->getInterns()) > 0) {
+                if ($internship->update(['status' => '2'])) {
+
+                    return redirect()->route('internship.index',)->with('success', "internship has been Started successfully!");
+                } else {
+                    return redirect()->route('internship.index')->with('error', 'Something went wrong, please try again!');
+                }
+            // } else {
+            //     return redirect()->route('internship.index')->with('error', 'No available Intern!');
+            // }
+        } else {
+        }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\Internship;
 use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -127,5 +128,10 @@ class DepartmentController extends Controller
 
         return redirect()->route('department.index')->with('Success', 'successfully deleted');
 
+    }
+
+    public function apiIndex(){
+
+        $internships = Internship::all();
     }
 }

@@ -8,6 +8,7 @@ import 'bootstrap';
 
 import axios from 'axios';
 import jQuery from 'jquery';
+import bootstrap from 'bootstrap';
 window.$ = jQuery;
 window.axios = axios;
 

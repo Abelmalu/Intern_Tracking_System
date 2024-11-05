@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\internship_prerequisites;
 use App\Models\Internship;
 
+
 class InternshipPrerequisitesController extends Controller
 {
     //
@@ -23,14 +24,19 @@ class InternshipPrerequisitesController extends Controller
                     ]);
                 }
             } else {
-                $arr = [0 => $prerequisite];
+
+
+                $arr = [0 => $prerequisite,
+                ];
+
+                // dd($internship->title);
                 $flag = $internship->prerequisites()->createMany($arr);
             }
         }
         if ($flag) {
-            return redirect()->route('internship.index', $internship->id)->with('success', 'Internship has been updated successfully!');
+            return redirect()->route('internship.index' )->with('success', 'Internship has been updated successfully!');
         } else {
-            return redirect()->route('internship.index', $internship->id)->with('error', 'Something went wrong, please try again!');
+            return redirect()->route('internship.index')->with('error', 'Something went wrong, please try again!');
         }
 
 

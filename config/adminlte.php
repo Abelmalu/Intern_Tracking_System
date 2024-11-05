@@ -440,7 +440,16 @@ return [
             'text' => 'Applications',
             'url' => 'application',
             'can' => 'readDelete applications',
-            'icon' => 'nav-icon fas fa-paper-plane nav-icon'
+            'icon' => 'nav-icon fas fa-paper-plane nav-icon',
+            'submenu' => [
+
+
+                [
+                    'text' => 'Application List',
+                    'url' => 'application/',
+                    'icon' => 'nav-icon fas fa-list nav-icon',
+                ],
+            ],
         ],
         [
             'text' => 'Interns',
@@ -448,14 +457,34 @@ return [
             'can' => 'readDelete interns',
             'icon' => 'nav-icon fas fa-user-graduate'
         ],
+
+
+         [
+            'text' => 'Applications',
+            'url' => 'application',
+
+            'icon' => 'nav-icon fas fa-paper-plane nav-icon',
+            'submenu' => [
+
+
+                [
+                    'text' => 'Application List',
+                    'url' => 'application/',
+                    'icon' => 'nav-icon fas fa-list nav-icon',
+                ],
+            ],
+        ],
+
+
         [
             'text' => 'Reports',
             'url' => '',
             'icon' => 'nav-icon far fa-file-pdf'
         ],
+
         [
             'text' => 'Profile',
-            'url' => '',
+            'url' => 'userProfile/',
             'icon' => 'nav-icon nav-icon fas fa-user'
         ],
     ],

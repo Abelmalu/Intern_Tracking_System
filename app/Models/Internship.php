@@ -30,13 +30,17 @@ class Internship extends Model
     }
 
 
-
     public function prerequisites(){
 
 
         return $this->hasMany(internship_prerequisites::class);
     }
 
+
+    public function applications(){
+
+        return $this->hasMany(User_application::class);
+    }
 
     public function isDeadlinePassed(){
 
@@ -53,6 +57,22 @@ class Internship extends Model
     public function isEnded(): bool
     {
         return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->end_date)->isPast();
+    }
+
+    public function getInterns(){
+
+        $userApplications = User_application::where('internship_id',$this->id)->where('status', '1')->get();
+
+
+        $users = [];
+
+        foreach ($userApplications as $userApplication) {
+            $users[] = $userApplication->user;
+        }
+
+        return $users;
+
+
     }
 
     public function updateStatus(int $status = null): bool

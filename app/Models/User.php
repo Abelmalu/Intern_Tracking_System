@@ -48,48 +48,89 @@ class User extends Authenticatable
     ];
 
 
-//    Relationships
+    //    Relationships
 
-    public function infromation(){
+    public function information()
+    {
 
         return $this->hasOne(User_information::class);
     }
 
 
-    public function department(){
+    public function department()
+    {
 
         return $this->hasOne(Department::class, 'head_id', 'id');
-
     }
 
 
-    public function school(){
+    public function school()
+    {
 
         return $this->hasOne(Department::class, 'head_id', 'id');
-
     }
 
-    public function applications(){
+    public function applications()
+    {
 
         return $this->hasMany(User_application::class);
-
     }
     //relationships end here
 
 
-    public function getName(){
+    public function getName() {}
 
-
-    }
-
-    public function programs(){
+    public function programs()
+    {
 
 
         return $this->belongsToMany(Program::class);
     }
 
 
-   
+    public function hasInternship()
+    {
+
+        if ($this->applications) {
+
+            $flag = false;
+            foreach ($this->applications as $application) {
+
+                if ($application->status == 1) {
+
+                    $flag = true;
+                    break;
+                }
+
+                return $flag;
+            }
+        } else {
+            return false;
+        }
+    }
+
+
+    public function alreadyApplied(Internship $intenrship)
+    {
+
+        if ($this->applications) {
+
+            $flag = false;
+
+            foreach ($this->applications as $application) {
+                if ($intenrship->id == $application->internship_id) {
+
+                    $flag = true;
+                    break;
+                }
+            }
+
+            return $flag;
+        } else {
+
+            return false;
+        }
+    }
 
 
 }

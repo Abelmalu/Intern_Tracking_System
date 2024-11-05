@@ -18,4 +18,9 @@ class internship_prerequisites extends Model
 
         return $this->belongsTo(internship::class);
     }
+
+    public function prerequisiteResponses()
+    {
+        return $this->hasMany(UserPrerequisiteResponse::class, 'user_application_id', 'id');
+    }
 }

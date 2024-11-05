@@ -25,7 +25,7 @@ class HomeController extends Controller
     {
         return view('pages.admin.admin_index');
     }
-    
+
     public function schoolIndex()
     {
         return view('home');
@@ -33,6 +33,6 @@ class HomeController extends Controller
 
     public function userIndex()
     {
-        return view('home');
+        return view('pages.user.user_home');
     }
 }

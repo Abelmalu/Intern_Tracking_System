@@ -77,6 +77,7 @@ class LoginController extends Controller
         $redirects = [
             'admin' => '/home',
             'department' => '/dashboard',
+            'user' => '/userHome'
 
         ];
 

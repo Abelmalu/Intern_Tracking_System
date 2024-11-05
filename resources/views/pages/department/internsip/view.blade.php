@@ -107,13 +107,26 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="row">
+                            <div class="row justify-content-between">
                                 <div class="col-md-2"></div>
                                 <div class="col-md-8">
                                     <p> Internship Description: </p>
                                     <p>{{ $internship->description }}</p>
                                 </div>
-                                <div class="col-md-2"></div>
+                                <div class="col-md-2">
+                                    {{-- @if(auth()->user()->hasRole('user'))
+
+                                        <a href="#" class="btn btn-primary">
+                                          <i class="fas fa-paper-plane"></i>
+                                            Apply
+                                        </a>
+
+
+
+                                    @endif --}}
+
+
+                                </div>
                             </div>
                         </div>
                     </div>

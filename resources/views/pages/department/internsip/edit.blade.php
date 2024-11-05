@@ -215,8 +215,8 @@
                 </div>
 
                 <div class="col-md-12">
-                    <form method="POST" action="{{ route('prerequisite.update',$internship)}}">
-                        @method('PUT')
+                    <form method="POST" action="{{ route('internship_pre.update',$internship)}}">
+                        
                         @csrf
                         <div class="card card-default">
                             <div class="card-header">
@@ -332,7 +332,7 @@
 
 
 
-    @if (request()->is('internship/create') || request()->is('internship/edit*'))
+    @if (request()->is('internship/create') || request()->is('internship/*edit'))
         @if (request()->is('internship/create'))
             var counter = 2;
         @else
@@ -357,7 +357,7 @@
             $(this).parents("#inputGroupDiv").remove();
             counter--;
         })
-        @if (request()->is('internship/edit*'))
+        @if (request()->is('internship/*edit'))
             deleteOriginal = (it, id) => {
                 inp = '<input type="hidden" name="prerequisite[' + it + '][deleted]" value="' + id + '">';
                 if (confirm('Are you sure, you want to delete ?') == true) {
