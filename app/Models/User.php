@@ -132,5 +132,45 @@ class User extends Authenticatable
         }
     }
 
+    public function isEligibleToApply(Internship $internship): array
+    {
+        /**
+         * errors list
+         *
+         * @var array $errors
+         */
+        $errors = [];
+        if ($this->information) {
+
+            
+            if (!$this->information->student_id) {
+                $errors[] = ['You didn\'t fill Student Id!'];
+            }
+            if (!$this->information->cgpa) {
+                $errors[] = ['You didn\'t fill Cumulative GPA!'];
+            }
+            if (!$this->information->university) {
+                $errors[] = ['You didn\'t fill University!'];
+            }
+            if (!$this->information->application_letter_file_path) {
+                $errors[] = ['You didn\'t upload application letter!'];
+            }
+            if (!$this->information->application_acceptance_file_path) {
+                $errors[] = ['You didn\'t upload application acceptance form!'];
+            }
+            if (!$this->information->student_id_file_path) {
+                $errors[] = ['You didn\'t upload student id!'];
+            }
+            if ($this->information->cgpa < $internship->minimum_cgpa) {
+                $errors[] = ['Your Cumulative GPA is lower then the minimum required Cumulative GPA'];
+            }
+        } else {
+            $errors[] = ['Your don\'t have any information filled, please fill first!'];
+        }
+
+
+        return $errors;
+    }
+
 
 }

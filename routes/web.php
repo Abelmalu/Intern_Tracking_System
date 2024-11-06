@@ -76,6 +76,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/userHome', [HomeController::class, 'userIndex'])->name('user.home');
     Route::get('/internship/{internship}', [InternshipController::class, 'show']);
     Route::get('/apply/{internship}', [UserApplicationController::class, 'create'])->name('user.internship.apply');
+    Route::post('/apply/{internship}', [UserApplicationController::class, 'store'])->name('user.application.store');
     Route::prefix('/userProfile')->group(function (){
 
         Route::get('/',[UserController::class,'profile'])->name('userProfile.detail');
