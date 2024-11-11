@@ -59,21 +59,7 @@ class Internship extends Model
         return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $this->end_date)->isPast();
     }
 
-    public function getInterns(){
 
-        $userApplications = User_application::where('internship_id',$this->id)->where('status', '1')->get();
-
-
-        $users = [];
-
-        foreach ($userApplications as $userApplication) {
-            $users[] = $userApplication->user;
-        }
-
-        return $users;
-
-
-    }
 
     public function updateStatus(int $status = null): bool
     {
@@ -93,6 +79,64 @@ class Internship extends Model
             }
         }
         return true;
+    }
+
+
+    public function statistics(){
+
+        $flag = [
+            'applicatiionCount'=>$this->applications ? count($this->applications):0,
+            'acceptedApplications'=>0,
+            'rejectedApplications'=>0,
+            'pendingApplications'=>0
+
+        ];
+
+        if($this->applications){
+            foreach($this->applications as $application){
+                if($application->status == 0){
+                    $flag['pendingApplications']++;
+                }
+
+                elseif($application->status == 1){
+
+                    $flag['acceptedApplications']++;
+                }
+                elseif($application->status == 2){
+
+                    $flag['rejectedApplications']++;
+                }
+
+            }
+            return $flag;
+        }
+    }
+
+    public function isQuotaFull(){
+
+        if($this->quota == null) return true;
+        return ($this->quota - $this->statistics()['acceptedApplications'] <=0 );
+    }
+
+    public function getInterns(){
+
+        $users=[];
+
+        if($this->applications){
+            foreach($this->applications as $application){
+
+                if($application->status == 1){
+
+                    $users[]=$application->user;
+                }
+
+
+            }
+            return $users;
+        }
+
+
+
     }
 
 }

@@ -424,6 +424,22 @@ return [
 
         ],
 
+        [
+            'text' => 'Applications',
+            'can' => 'manage internships',
+            'icon' => 'nav-icon fas fa-briefcase',
+            'submenu' => [
+
+
+                [
+                    'text' => 'Application List',
+                    'url' => 'department/application',
+                    'icon' => 'nav-icon fas fa-list nav-icon',
+                ],
+            ],
+
+        ],
+
 
 
 
@@ -435,22 +451,6 @@ return [
             'can' => 'readDelete internships',
             'icon' => 'nav-icon fas fa-briefcase'
         ],
-
-        [
-            'text' => 'Applications',
-            'url' => 'application',
-            'can' => 'readDelete applications',
-            'icon' => 'nav-icon fas fa-paper-plane nav-icon',
-            'submenu' => [
-
-
-                [
-                    'text' => 'Application List',
-                    'url' => 'application/',
-                    'icon' => 'nav-icon fas fa-list nav-icon',
-                ],
-            ],
-        ],
         [
             'text' => 'Interns',
             'url' => '',
@@ -459,20 +459,14 @@ return [
         ],
 
 
-         [
+        [
             'text' => 'Applications',
-            'url' => 'application',
+
+            'url' => 'application/',
 
             'icon' => 'nav-icon fas fa-paper-plane nav-icon',
-            'submenu' => [
+            'can'=> 'apply internships'
 
-
-                [
-                    'text' => 'Application List',
-                    'url' => 'application/',
-                    'icon' => 'nav-icon fas fa-list nav-icon',
-                ],
-            ],
         ],
 
 

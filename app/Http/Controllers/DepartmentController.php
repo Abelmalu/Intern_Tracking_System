@@ -52,6 +52,8 @@ class DepartmentController extends Controller
 
         $department = new Department($request->all());
         $department_head = User::find($request->get('head_id'));
+        $department_head->update(['type'=>3]);
+
 
 
         if ($department->save()) {

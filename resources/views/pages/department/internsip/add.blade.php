@@ -148,7 +148,7 @@
                                                         <div class="input-group date" id="reservationdatetime2"
                                                             data-target-input="nearest">
                                                             <input type="text" name="end_date" class="form-control datetimepicker-input"
-                                                                data-target="#reservationdatetime2" placeholder="End Date" required />
+                                                                data-target="#reservationdatetime2" placeholder="End Date"  />
                                                             <div class="input-group-append" data-target="#reservationdatetime2"
                                                                 data-toggle="datetimepicker">
                                                                 <div class="input-group-text"><i class="fa fa-calendar"></i>

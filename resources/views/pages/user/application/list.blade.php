@@ -24,7 +24,6 @@
                         @foreach ($applications as $application)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $application->user->name}}</td>
                                 <td>{{ $application->internship->title }}</td>
                                 @if ($application->status == 0)
                                     <td>pending</td>
@@ -34,13 +33,8 @@
                                     <td>Rejected</td>
                                 @endif
                                 <td>{{ $application->created_at }}</td>
-
-                                <td><a href="{{ route('department.application.view', $application) }}">
-                                                    <button class="btn btn-info btn-xs btn-flat">
-                                                        <i class="fas fa-eye"></i>
-                                                        View
-                                                    </button>
-                                                </a></td>
+                                <td>{{ $application->internship->start_date }}</td>
+                                <td>No action required</td>
                             </tr>
                         @endforeach
 

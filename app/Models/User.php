@@ -24,7 +24,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'is_staff'
+        'is_staff',
+        'type'
     ];
 
     /**
@@ -142,7 +143,7 @@ class User extends Authenticatable
         $errors = [];
         if ($this->information) {
 
-            
+
             if (!$this->information->student_id) {
                 $errors[] = ['You didn\'t fill Student Id!'];
             }

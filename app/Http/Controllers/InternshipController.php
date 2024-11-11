@@ -32,8 +32,38 @@ class InternshipController extends Controller
 
 
     }
+
+
+    public function apiSearchIndex(string $query): array
+    {
+        /**
+
+         *
+         *
+         *
+         * all active internships
+         *
+         *
+         *
+         */
+        $internships = Internship::where('status', '1')
+            ->whereDate('deadline', '>=', date('Y-m-d H:i:s'))
+            ->where('title', 'LIKE', '%' . $query . '%')
+            ->orWhere('description', 'LIKE', '%' . $query . '%')
+            ->get();
+
+        $data = [];
+
+        foreach ($internships as $internship) {
+            $data[] = new InternshipResource($internship);
+        }
+        return $data;
+    }
+
     public function index()
     {
+        
+
 
         $internships = Internship::all();
         $heads = [

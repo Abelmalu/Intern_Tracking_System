@@ -12,6 +12,7 @@ use App\Http\Controllers\UserApplicationController;
 use App\Http\Controllers\InternshipPrerequisitesController;
 use App\Http\Controllers\UserInformationController;
 use App\Models\Internship;
+use App\Models\User_application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,6 +60,10 @@ Route::middleware(['auth', 'role:department'])->group(function () {
     Route::get('internship/show/{internship}', [InternshipController::class, 'show'])->name('internship.showw');
     Route::post('/update/{internship}', [InternshipPrerequisitesController::class, 'update'])->name('internship_pre.update');
     Route::get('/internStart/{internship}', [InternshipController::class, 'start'])->name('internship.start');
+    Route::get('/department/application',[UserApplicationController::class,'departmentIndex'])->name('department.application');
+    Route::get('/application/view/{application}',[UserApplicationController::class,'show'])->name('department.application.view');
+    Route::get('department/applciation/accept/{application}',[UserApplicationController::class,'acceptApplication'])->name('department.application.accept');
+    Route::get('department/applciation/reject/{application}',[UserApplicationController::class,'acceptApplication'])->name('department.application.reject');
 
     // Route::resource('/application',[UserApplicationController::class]);
 });
@@ -77,6 +82,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/internship/{internship}', [InternshipController::class, 'show']);
     Route::get('/apply/{internship}', [UserApplicationController::class, 'create'])->name('user.internship.apply');
     Route::post('/apply/{internship}', [UserApplicationController::class, 'store'])->name('user.application.store');
+    Route::get('/application',[UserApplicationController::class,'userIndex']);
     Route::prefix('/userProfile')->group(function (){
 
         Route::get('/',[UserController::class,'profile'])->name('userProfile.detail');

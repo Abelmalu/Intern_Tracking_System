@@ -80,9 +80,11 @@
 
     @section('js')
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                loadInternships();
-            })
+
+                $(function() {
+
+            loadInternships();
+        });
 
 
 
@@ -139,5 +141,71 @@
 
 
             }
+
+
+            document.getElementById("searchQuerySubmitBtn").addEventListener("click", function(event) {
+            event.preventDefault();
+            var ras = $('#searchQuery').val();
+            
+            if (ras != undefined && ras != null && ras != '') {
+                let dom =
+                    '<div class="col-md-12 mt-5">' +
+                    '<center>' +
+                    '<i class="fas fa-3x fa-sync-alt fa-spin"></i>' +
+                    '</center>' +
+                    '</div>'
+                $('#searchResultDiv').html(dom);
+                searchInternship(ras);
+            } else {
+                refreshIntervalId = setInterval(function() {
+                    $('#searchQuery').toggleClass('is-invalid');
+                }, 300);
+
+                setTimeout(function() {
+                    clearInterval(refreshIntervalId)
+                    $('#searchQuery').removeClass('is-invalid');
+                }, 1500);
+            }
+        });
+
+
+        function searchInternship(ras) {
+            $.get('{{ env('APP_URL') }}/api/internship/' + ras, function(data) {
+                if (data.length == 0) {
+                    let dom =
+                        '<div class="col-md-12 mt-5">' +
+                        '<center>' +
+                        'Oops, we couldn\'t find any data!<a style="cursor:pointer;" class="fas fa-sync-alt ml-2" onClick="searchInternship(\'\')"></a>' +
+                        '</center>' +
+                        '</div>'
+                    $('#searchResultDiv').html(dom);
+                } else {
+                    $('#searchResultDiv').html('');
+                    for (var i = 0; i < data.length; i++) {
+                        let dom =
+                            '<div class="col-md-12">' +
+                            '<div class="card">' +
+                            '<div class="card-header">' +
+                            '<h5 class="card-title m-0">' + data[i].department_name + '</h5>' +
+                            '</div>' +
+                            '<div class="card-body">' +
+                            '<h6 class="card-title">' + data[i].title + '</h6>' +
+
+                            '<p class="card-text">' + data[i].description + '</p>' +
+                            '<a style="width:15%;"  href="{{ env('APP_URL') }}/user/internship/view/' + data[i]
+                            .id + '" class="btn btn-info float-right">View</a>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>';
+
+                        $('#searchResultDiv').append(dom);
+                    }
+                    $(".msgTextTimp").each(function() {
+                        $(this).text($(this).text().substr(0, 150));
+                        $(this).append('...');
+                    });
+                }
+            });
+        }
         </script>
     @stop
