@@ -417,7 +417,7 @@ return [
 
                 [
                     'text' => 'Internship List',
-                    'url' => 'internship/',
+                    'url' => '/internship/dpindex',
                     'icon' => 'nav-icon fas fa-list nav-icon',
                 ],
             ],
@@ -447,7 +447,7 @@ return [
 
         [
             'text' => 'Internships',
-            'url' => 'internship',
+            'url' => 'internship/list',
             'can' => 'readDelete internships',
             'icon' => 'nav-icon fas fa-briefcase'
         ],

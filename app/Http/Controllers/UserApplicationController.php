@@ -214,14 +214,27 @@ class UserapplicationController extends Controller
         }
 
     }
+
+    public function rejectApplication(User_application $application){
+
+        
+    }
     public function   update (){
 
     }
     public function   edit (){
 
     }
-    public function   destroy (){
+    public function   destroy (User_application $application){
+        if($application->delete()){
 
+            return redirect()->route('department.application.index')->with('success','Successfully deleted the application');
+
+        }
+        else{
+
+        return redirect()->route('department.application.index')->with('error', 'could not delete something went wrong');
+        }
     }
 
 }

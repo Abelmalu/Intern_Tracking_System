@@ -128,7 +128,7 @@
                 <label>University</label> <i class="text-danger font-weight-bold">*</i>
                 <input id="university" placeholder="Enter University" type="text"
                     class="form-control @error('university') is-invalid @enderror" name="university"
-                    value="{{ Auth::user()->information->university }}" required autocomplete="university">
+                    value="" required autocomplete="university">
                 @error('university')
                     <span class="text-danger" role="alert">
                         {{ $message }}

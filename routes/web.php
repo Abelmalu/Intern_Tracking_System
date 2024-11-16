@@ -51,19 +51,25 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::resource('program', ProgramController::class);
     Route::get('program/destroy/{program}', [ProgramController::class, 'destroy'])->name('program.delete');
+
+
+    Route::get('internship/list',[InternshipController::class,'index']);
 });
 
 Route::middleware(['auth', 'role:department'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'departmentIndex'])->name('department.home');
+    Route::get('/internship/dpindex', [InternshipController::class, 'depIndex'])->name('department.internship.index');
     Route::resource('internship', InternshipController::class);
+
     Route::get('internship/destroy/{internship}', [InternshipController::class, 'destroy'])->name('internship.delete');
     Route::get('internship/show/{internship}', [InternshipController::class, 'show'])->name('internship.showw');
     Route::post('/update/{internship}', [InternshipPrerequisitesController::class, 'update'])->name('internship_pre.update');
     Route::get('/internStart/{internship}', [InternshipController::class, 'start'])->name('internship.start');
-    Route::get('/department/application',[UserApplicationController::class,'departmentIndex'])->name('department.application');
+    Route::get('/department/application',[UserApplicationController::class,'departmentIndex'])->name('department.application.index');
     Route::get('/application/view/{application}',[UserApplicationController::class,'show'])->name('department.application.view');
     Route::get('department/applciation/accept/{application}',[UserApplicationController::class,'acceptApplication'])->name('department.application.accept');
     Route::get('department/applciation/reject/{application}',[UserApplicationController::class,'acceptApplication'])->name('department.application.reject');
+    Route::get('department/applciation/delete/{application}',[UserApplicationController::class,'destroy'])->name('department.application.delete');
 
     // Route::resource('/application',[UserApplicationController::class]);
 });

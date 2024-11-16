@@ -60,12 +60,30 @@ class InternshipController extends Controller
         return $data;
     }
 
-    public function index()
-    {
-        
-
+    public function index(){
 
         $internships = Internship::all();
+
+        $heads = [
+
+            '#' => '#',
+            'Title',
+            'Quota ',
+            'Deadline',
+            'Status',
+            'Actions'
+
+        ];
+
+        return view('pages.admin.internship.list', compact('internships', 'heads'));
+    }
+
+    public function depIndex()
+    {
+        $userDep = auth()->user()->department->id;
+
+
+        $internships = Internship::where('department_id',$userDep)->get();
         $heads = [
 
             '#' => '#',

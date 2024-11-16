@@ -41,6 +41,12 @@
                                                         View
                                                     </button>
                                                 </a></td>
+                                <td><a href="{{ route('department.application.delete', $application) }}">
+                                                    <button class="btn btn-danger btn-xs btn-flat">
+                                                        <i class="fas fa-eye"></i>
+                                                        delete
+                                                    </button>
+                                                </a></td>
                             </tr>
                         @endforeach
 
